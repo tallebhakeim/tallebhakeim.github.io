@@ -187,13 +187,13 @@ const EN = {
 const UI = {
   fr:{title:"Hakeim Talleb, recherche", search:"Rechercher un titre, un auteur, une revue", searchLabel:"Rechercher dans les publications",
       stats:["articles de revue","communications","période","textes intégraux sur HAL"], chartJ:"article(s)", chartO:"communication(s) ou autre", chartLabel:"Publications par année",
-      pubs:"publications", topic:"Thème", clear:"retirer le filtre", empty:"Aucune publication ne correspond. Essayez un autre mot ou retirez le filtre de thème.",
+      pubs:"publications", topic:"Thème : ", clear:"retirer le filtre", empty:"Aucune publication ne correspond. Essayez un autre mot ou retirez le filtre de thème.",
       full:"Texte intégral (HAL)", notice:"Notice HAL", code:"Code (Zenodo)", vol:"vol. ", no:"n° ", p:"p. ",
       tabs:{all:"Tout",journal:"Revues",conf:"Communications",other:"Rapports, thèse"},
       kind:{journal:"Article", conf:"Communication", expertise:"Rapport d'expertise", thesis:"Thèse de doctorat", other:"Article de lettre"}},
   en:{title:"Hakeim Talleb, research", search:"Search titles, authors, journals", searchLabel:"Search publications",
       stats:["journal articles","conference papers","years","full texts on HAL"], chartJ:"article(s)", chartO:"conference paper(s) or other", chartLabel:"Publications per year",
-      pubs:"publications", topic:"Topic", clear:"clear filter", empty:"No publication matches. Try another word or clear the topic filter.",
+      pubs:"publications", topic:"Topic: ", clear:"clear filter", empty:"No publication matches. Try another word or clear the topic filter.",
       full:"Full text (HAL)", notice:"HAL record", code:"Code (Zenodo)", vol:"vol. ", no:"no. ", p:"pp. ",
       tabs:{all:"All",journal:"Journals",conf:"Conferences",other:"Reports, thesis"},
       kind:{journal:"Article", conf:"Conference paper", expertise:"Expert report", thesis:"PhD thesis", other:"Newsletter article"}},
@@ -292,7 +292,7 @@ function renderList(){
   const ps=PUBS.filter(tab.test).filter(p=>!state.axis||p.axes.includes(state.axis))
     .filter(p=>!q||(p.title+" "+p.authors.join(" ")+" "+(p.venue||"")).toLowerCase().includes(q));
   const ax=AXES.find(a=>a.id===state.axis);
-  document.getElementById("activeAxis").innerHTML=ax?`${U.topic} : ${esc(ax.name[state.lang])} (${ps.length})<button id="clearAxis">${U.clear}</button>`:"";
+  document.getElementById("activeAxis").innerHTML=ax?`${U.topic}${esc(ax.name[state.lang])} (${ps.length})<button id="clearAxis">${U.clear}</button>`:"";
   if(!ps.length){document.getElementById("list").innerHTML=`<p class="empty">${U.empty}</p>`;return;}
   let html="", cur=null;
   ps.forEach(p=>{
